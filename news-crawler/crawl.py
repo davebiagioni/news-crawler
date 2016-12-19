@@ -150,8 +150,6 @@ def main(apikey, feed_dir, outdir, db_file, dry_run, index, doc_type, es_host):
   pool.close()
   pool.join()
 
-  return result
-
 
 if __name__ == '__main__':
   parser = argparse.ArgumentParser(description='Ingest urls from in feeds')
