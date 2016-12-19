@@ -1,2 +1,5 @@
-# news-crawler
-Crawl and enrich RSS feeds of to generate training data for classifiers.
+# fake-news
+
+data: output from crawl
+news-crawler: source python code
+rss: rss feed files
