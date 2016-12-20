@@ -111,7 +111,7 @@ def main(summary=False):
     # Create output directory if it doesn't exist.
     if not os.path.exists(out_dir):
       _ = os.makedirs(out_dir)
-      print('Created output directory {}'.format(out_dir))
+      log.info('Created output directory {}'.format(out_dir))
 
     # Log the output directory
     log.info('Set output path to {}'.format(out_dir))

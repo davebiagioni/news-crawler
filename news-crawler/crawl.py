@@ -57,17 +57,14 @@ def process_feed(args):
     res['label'] = args[7]
 
     # Write to file.
-    wrote = write(res, args[2])
+    _ = write(res, args[2])
 
     # Insert to elasticsearch.
-    inserted = es.insert(args[5], args[3], args[4], res, args[2])
+    _ = es.insert(args[5], args[3], args[4], res, args[2])
 
     # Add to dedup database.
-    if (wrote and inserted):
-      _ = sql.insert(args[6], today(), args[0])
-    else:
-      return False
-
+    _ = sql.insert(args[6], today(), args[0])
+    
     return res
 
   except:
@@ -172,7 +169,7 @@ if __name__ == '__main__':
   args.dry_run = args.dry_run if args.dry_run else False
   args.es_host = args.es_host if args.es_host else 'localhost:9200'
 
-  print(args)
+  log.info(args)
 
   _ = main(args.apikey, args.feed_dir, args.out_dir, args.db_file, args.dry_run,
            args.index, args.doc_type, args.es_host)

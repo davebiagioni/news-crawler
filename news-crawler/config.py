@@ -25,7 +25,8 @@ def default_db():
 def logging():
   logfile = os.path.join(here(), 'log.txt')
   log.basicConfig(
-    #filename=logfile, 
+    filename='log.txt',
+    filemode='a', 
     format='%(asctime)s | %(levelname)-5.5s | %(message)s', 
     level=log.INFO
   )
