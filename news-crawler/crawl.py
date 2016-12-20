@@ -172,7 +172,7 @@ if __name__ == '__main__':
   args.dry_run = args.dry_run if args.dry_run else False
   args.es_host = args.es_host if args.es_host else 'localhost:9200'
 
-  print(args)
+  log.info(args)
 
   _ = main(args.apikey, args.feed_dir, args.out_dir, args.db_file, args.dry_run,
            args.index, args.doc_type, args.es_host)
