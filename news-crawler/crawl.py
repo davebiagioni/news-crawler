@@ -57,17 +57,14 @@ def process_feed(args):
     res['label'] = args[7]
 
     # Write to file.
-    wrote = write(res, args[2])
+    _ = write(res, args[2])
 
     # Insert to elasticsearch.
-    inserted = es.insert(args[5], args[3], args[4], res, args[2])
+    _ = es.insert(args[5], args[3], args[4], res, args[2])
 
     # Add to dedup database.
-    if (wrote and inserted):
-      _ = sql.insert(args[6], today(), args[0])
-    else:
-      return False
-
+    _ = sql.insert(args[6], today(), args[0])
+    
     return res
 
   except:
