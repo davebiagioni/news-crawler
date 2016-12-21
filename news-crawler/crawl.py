@@ -118,8 +118,8 @@ def main(apikey, feed_dir, outdir, db_file, dry_run, index, doc_type, es_host):
       urls = sql.deduplicate(urls, db_file)
       log.info('Number of novel urls: {}'.format(len(urls)))
 
-      # If in dry run mode, don't do anything else.
-      if  dry_run:
+      # If in dry run mode or there are no novel urls, don't do anything else.
+      if  dry_run or len(urls) == 0:
         continue
 
       # Get base filenames from urls.
@@ -127,10 +127,6 @@ def main(apikey, feed_dir, outdir, db_file, dry_run, index, doc_type, es_host):
       args = zip(urls, [apikey]*len(urls), outnames, [index]*len(urls),
         [doc_type]*len(urls), [es_host]*len(urls), [db_file]*len(urls),
         [label]*len(urls))
-
-      # If there are no urls to crawl, continue.
-      if len(args) == 0:
-        continue
 
       # Multiprocess feeds.
       _ = pool.map(process_feed, args)
