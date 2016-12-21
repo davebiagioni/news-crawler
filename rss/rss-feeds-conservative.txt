@@ -17,3 +17,11 @@ http://www.newsbusters.org/blog/feed
 http://twitchy.com/tag/rss/
 http://feeds.feedburner.com/FreeBeacon
 http://www.weeklystandard.com/rss/all
+http://twitchy.com/category/us-politics/feed/
+http://www.washingtonexaminer.com/rss/politics
+http://www.infowars.com/rss/daily/
+http://www.heritage.org/static/RSS/Political-Thought.xml
+http://thehill.com/rss/syndicator/19109
+http://feeds.feedburner.com/realclearpolitics/qlMj
+http://feeds.feedburner.com/americanthinker_articles
+http://feeds.feedburner.com/RushLimbaugh-AllContent
