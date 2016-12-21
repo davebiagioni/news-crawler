@@ -17,13 +17,9 @@ ALCHEMY_URL = 'https://gateway-a.watsonplatform.net/calls/url/URLGetCombinedData
 log = config.logging()
 
 def write(data, filename):
-  try:
-    with open(filename, 'w') as f:
-      json.dump(data, f)
-    return True
-  except:
-    log.error('Failed to write {}'.format(filename))
-    return False
+  with open(filename, 'w') as f:
+    json.dump(data, f)
+  log.info('Wrote {}'.format(filename))
 
 def enrich_url(args):
   target_url, apikey = args[:2]
@@ -57,13 +53,13 @@ def process_feed(args):
     res['label'] = args[7]
 
     # Write to file.
-    _ = write(res, args[2])
+    write(res, args[2])
 
     # Insert to elasticsearch.
-    _ = es.insert(args[5], args[3], args[4], res, args[2])
+    #_ = es.insert(args[5], args[3], args[4], res, args[2])
 
     # Add to dedup database.
-    _ = sql.insert(args[6], today(), args[0])
+    sql.insert(args[6], today(), args[0])
     
     return res
 

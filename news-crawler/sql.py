@@ -10,7 +10,7 @@ import logging
 import sys
 import config
 
-logging = config.logging()
+log = config.logging()
 
 def get_default_db():
   return os.path.join(config.here(), os.path.join('..', os.path.join('data', 'urls.db')))
@@ -28,6 +28,7 @@ def insert(db_file, date, urls):
     c.execute('INSERT INTO urls VALUES (?,?)', (date, url))
     conn.commit()
   conn.close()
+  log.info('Inserted {}'.format(url))
   return True
 
 def url_exists(db_file, url, c=None):
@@ -50,7 +51,7 @@ def deduplicate(urls, db_file):
   if type(urls) is str:
     urls = [urls]
   if not os.path.exists(db_file):
-    logging.error('db {} does not exist, exiting'.format(db_file))
+    log.error('db {} does not exist, exiting'.format(db_file))
     return False
   conn = connect(db_file)
   c = conn.cursor()
@@ -65,7 +66,7 @@ def create(db_file):
   conn = connect(db_file)
   c = conn.cursor()
   c.execute('''CREATE TABLE urls (date text, url text )''')
-  logging.info('Created table "urls" in {}'.format(db_file))
+  log.info('Created table "urls" in {}'.format(db_file))
   conn.close()
 
 def main(db_file):
@@ -73,7 +74,7 @@ def main(db_file):
   if not os.path.exists(dirname):
     _ = os.makedirs(dirname)
   if os.path.exists(db_file):
-    logging.warning('db {} already exists, exiting'.format(db_file))
+    log.warning('db {} already exists, exiting'.format(db_file))
     return False
   create(db_file)
   return True
