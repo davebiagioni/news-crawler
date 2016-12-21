@@ -126,7 +126,7 @@ def main(apikey, feed_dir, outdir, db_file, dry_run, index, doc_type, es_host, t
       outnames = get_basenames(feed, len(urls), outdir)
       args = zip(urls, [apikey]*len(urls), outnames, [index]*len(urls),
         [doc_type]*len(urls), [es_host]*len(urls), [db_file]*len(urls),
-        [label]*len(urls), timeout*len(urls))
+        [label]*len(urls), [timeout]*len(urls))
 
       # Multiprocess feeds.
       _ = pool.map(process_feed, args)
@@ -158,6 +158,6 @@ if __name__ == '__main__':
   if not args.dry_run: args.dry_run = False
 
   log.info(args)
-
+  
   _ = main(args.apikey, args.feed_dir, args.out_dir, args.db_file, args.dry_run,
            args.index, args.doc_type, args.es_host, args.timeout)
