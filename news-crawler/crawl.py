@@ -44,6 +44,7 @@ def process_feed(args):
     if not (res.status_code >= 200 and res.status_code < 300):
       log.error('Error enriching {}'.format(args[0]))
       log.error(res.json())
+      log.error('Failed on HTTP code {}: {}'.format(res.status_code, args[1]))
       return 'error'
 
     # Normalize the document to set correct field types.
