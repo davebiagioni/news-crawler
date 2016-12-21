@@ -31,7 +31,7 @@ def enrich_url(args):
     "apikey": apikey,
     "url": target_url
   }
-  return requests.post(ALCHEMY_URL, data=data)
+  return requests.post(ALCHEMY_URL, data=data, timeout=args[8])
 
 def process_feed(args):
 
@@ -89,7 +89,7 @@ def get_label_from_path(feed):
   filename = os.path.basename(feed)
   return filename.split('-')[0]
 
-def main(apikey, feed_dir, outdir, db_file, dry_run, index, doc_type, es_host):
+def main(apikey, feed_dir, outdir, db_file, dry_run, index, doc_type, es_host, timeout):
 
   feeds = get_feeds(feed_dir)
   outdir = create_outdir(outdir)
@@ -126,7 +126,7 @@ def main(apikey, feed_dir, outdir, db_file, dry_run, index, doc_type, es_host):
       outnames = get_basenames(feed, len(urls), outdir)
       args = zip(urls, [apikey]*len(urls), outnames, [index]*len(urls),
         [doc_type]*len(urls), [es_host]*len(urls), [db_file]*len(urls),
-        [label]*len(urls))
+        [label]*len(urls), timeout*len(urls))
 
       # Multiprocess feeds.
       _ = pool.map(process_feed, args)
@@ -147,19 +147,17 @@ if __name__ == '__main__':
   parser.add_argument('--feed-dir', type=str, help='Directory to read feeds from.  Defaults to "../data/feeds/<today>"')
   parser.add_argument('--out-dir', type=str, help='Directory for output. Defaults to "../data/articles/<today>')
   parser.add_argument('--dry-run', help='Run script without calling Alchemy.', action='store_true')
-  parser.add_argument('--index', type=str, help='Name of elasticsearch index.')
-  parser.add_argument('--doc-type', type=str, help='Type insert under, ie., http://$HOST/$TYPE')
-  parser.add_argument('--es-host', type=str, help='Elasticsearch host name, defaults to "localhost:9200"')
+  parser.add_argument('--index', type=str, help='Name of elasticsearch index.', default='news')
+  parser.add_argument('--doc-type', type=str, help='Type insert under, ie., http://$HOST/$TYPE', default='docs')
+  parser.add_argument('--es-host', type=str, help='Elasticsearch host name, defaults to "localhost:9200"', default='localhost:9200')
+  parser.add_argument('--timeout', type=float, help='Timeout for requests in seconds', default=30.0)
   args = parser.parse_args()
 
   if not args.db_file: args.db_file = sql.get_default_db()
   if not args.feed_dir: args.feed_dir = os.path.join(config.feed_dir(), today())
-  if not args.index: args.index = 'news'
-  if not args.doc_type: args.doc_type = 'docs'
   if not args.dry_run: args.dry_run = False
-  if not args.es_host: args.es_host = 'localhost:9200'
 
   log.info(args)
 
   _ = main(args.apikey, args.feed_dir, args.out_dir, args.db_file, args.dry_run,
-           args.index, args.doc_type, args.es_host)
+           args.index, args.doc_type, args.es_host, args.timeout)
