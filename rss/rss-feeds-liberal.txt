@@ -26,3 +26,7 @@ http://rssfeeds.usatoday.com/usatoday-NewsTopStories
 http://rssfeeds.usatoday.com/UsatodaycomNation-TopStories
 http://rssfeeds.usatoday.com/UsatodaycomWashington-TopStories
 http://www.huffingtonpost.com/feeds/index.xml
+http://www.newsweek.com/newsfeed
+http://www.dailykos.com/news/RSS
+http://feeds.feedburner.com/motherjones/Politics
+http://feeds.feedblitz.com/alternet&m=1&s=so40v

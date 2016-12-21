@@ -115,7 +115,7 @@ def main(apikey, feed_dir, outdir, db_file, dry_run, index, doc_type, es_host):
       
       # Get urls from feed files.
       urls = [x['link'] for x in feed_data['entries']]
-      log.info('Processing {} urls from feed {}'.format(len(urls), feed))
+      log.info('Found {} urls for feed {}'.format(len(urls), feed))
 
       # Deduplicate
       log.info('Deduplicating urls...')
