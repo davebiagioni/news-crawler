@@ -156,14 +156,12 @@ if __name__ == '__main__':
   parser.add_argument('--es-host', type=str, help='Elasticsearch host name, defaults to "localhost:9200"')
   args = parser.parse_args()
 
-  if not args.db_file:
-    args.db_file = sql.get_default_db()
-
-  if not args.feed_dir:
-    args.feed_dir = os.path.join(config.feed_dir(), today())
-
-  args.dry_run = args.dry_run if args.dry_run else False
-  args.es_host = args.es_host if args.es_host else 'localhost:9200'
+  if not args.db_file: args.db_file = sql.get_default_db()
+  if not args.feed_dir: args.feed_dir = os.path.join(config.feed_dir(), today())
+  if not args.index: args.index = 'news'
+  if not args.doc_type: args.doc_type = 'docs'
+  if not args.dry_run: args.dry_run = False
+  if not args.es_host: args.es_host = 'localhost:9200'
 
   log.info(args)
 
