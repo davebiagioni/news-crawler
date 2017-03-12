@@ -1,0 +1,9 @@
+http://www.clickhole.com/feeds/rss
+http://feeds.feedburner.com/CrackedRSS
+http://feeds.feedburner.com/NationalReport
+http://www.thedailymash.co.uk/feed
+http://www.theonion.com/feeds/rss
+http://feeds2.feedburner.com/Christwire
+http://dailycurrant.com/feed/
+http://syndication.thedailywtf.com/TheDailyWtf
+
