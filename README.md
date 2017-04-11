@@ -43,7 +43,7 @@ __How I'm using it:__  This could be made a lot easier to use, with a little wor
         screen -r crawl
         cd $HOME/gitrepos/news-crawler/bin/
         ./keep-running run.sh 28800
-        # ctrl-d to detach before exiting
+        # `ctrl-a d` to detach before exiting
 
 * Sync files to local machine:
 
