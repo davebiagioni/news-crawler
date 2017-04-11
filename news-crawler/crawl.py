@@ -10,7 +10,6 @@ import sys
 import sql
 import config
 import normalize
-import es
 from downloadRSS import today
 
 ALCHEMY_URL = 'https://gateway-a.watsonplatform.net/calls/url/URLGetCombinedData'
@@ -90,7 +89,7 @@ def get_label_from_path(feed):
   filename = os.path.basename(feed)
   return filename.split('-')[0]
 
-def main(apikey, feed_dir, outdir, db_file, dry_run, index, doc_type, es_host, timeout):
+def main(apikey, feed_dir, outdir, db_file, dry_run, timeout):
 
   feeds = get_feeds(feed_dir)
   outdir = create_outdir(outdir)
@@ -148,9 +147,6 @@ if __name__ == '__main__':
   parser.add_argument('--feed-dir', type=str, help='Directory to read feeds from.  Defaults to "../data/feeds/<today>"')
   parser.add_argument('--out-dir', type=str, help='Directory for output. Defaults to "../data/articles/<today>')
   parser.add_argument('--dry-run', help='Run script without calling Alchemy.', action='store_true')
-  parser.add_argument('--index', type=str, help='Name of elasticsearch index.', default='news')
-  parser.add_argument('--doc-type', type=str, help='Type insert under, ie., http://$HOST/$TYPE', default='docs')
-  parser.add_argument('--es-host', type=str, help='Elasticsearch host name, defaults to "localhost:9200"', default='localhost:9200')
   parser.add_argument('--timeout', type=float, help='Timeout for requests in seconds', default=30.0)
   args = parser.parse_args()
 
@@ -160,5 +156,4 @@ if __name__ == '__main__':
 
   log.info(args)
   
-  _ = main(args.apikey, args.feed_dir, args.out_dir, args.db_file, args.dry_run,
-           args.index, args.doc_type, args.es_host, args.timeout)
+  _ = main(args.apikey, args.feed_dir, args.out_dir, args.db_file, args.dry_run, args.timeout)
