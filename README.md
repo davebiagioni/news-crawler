@@ -16,3 +16,26 @@ the library enables the following:
 The AlchemyAPI endpoint makes is simple to scrape a given URL, and the NLP metadata can be used later
 to further filter down the types of articles we use for training.  If you don't want to use Alchemy 
 for crawling, you could replace this piece with, e.g., [BeautifulSoup](https://pypi.python.org/pypi/beautifulsoup4).
+
+The core functionality in Python is in the [news-crawler](news-crawler) directory.  Utility scripts used for 
+running on AWS and syncing the files to my local machine are in the [`bin`](bin) directory.
+
+__How I'm using it:__
+
+* Install Anaconda and create a `default` environment.
+
+        conda create -n default
+
+* Clone repo into `$HOME/gitrepos/.`
+
+* Install python dependencies:
+
+        cd $HOME/gitrepos/news-crawler
+        pip install -r requirements.txt
+
+* Drop APIKEY into `$HOME/gitrepos/news-crawler/news-crawler/key.txt`.
+* Poor mans cron job:
+ 
+        cd $HOME/gitrepos/news-crawler/bin/
+        ./keep-running run.sh 28800
+        
