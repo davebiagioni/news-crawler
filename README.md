@@ -34,8 +34,13 @@ __How I'm using it:__
         pip install -r requirements.txt
 
 * Drop APIKEY into `$HOME/gitrepos/news-crawler/news-crawler/key.txt`.
+* Create screen to run crawler in:
+
+        screen -S crawl     # creates screen
+
 * Poor mans cron job:
  
+        screen -r crawl
         cd $HOME/gitrepos/news-crawler/bin/
         ./keep-running run.sh 28800
-        
+        # ctrl-d to detach before exiting
