@@ -1,4 +1,6 @@
 #!/bin/bash
+# Activates the anaconda virtual env, downloads URLs for each RSS feed,
+# and crawls them.
 
 LOG_FILE=log.txt
 cd /home/ubuntu/news-crawler/news-crawler/
