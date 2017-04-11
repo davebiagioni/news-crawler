@@ -20,7 +20,7 @@ for crawling, you could replace this piece with, e.g., [BeautifulSoup](https://p
 The core functionality in Python is in the [news-crawler](news-crawler) directory.  Utility scripts used for 
 running on AWS and syncing the files to my local machine are in the [`bin`](bin) directory.
 
-__How I'm using it:__
+__How I'm using it:__  This could be made a lot easier to use, with a little work!
 
 * Install Anaconda and create a `default` environment.
 
