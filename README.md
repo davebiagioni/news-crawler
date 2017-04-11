@@ -44,3 +44,9 @@ __How I'm using it:__
         cd $HOME/gitrepos/news-crawler/bin/
         ./keep-running run.sh 28800
         # ctrl-d to detach before exiting
+
+* Sync files to local machine:
+
+        cd $HOME/gitrepos/news-crawler/bin
+        ./download.sh
+        
